@@ -20,22 +20,40 @@ import './App.css'
 function App() {
 
   
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState({
+    categoryName: '',
+    id: 0,
+    questions: []
+  });
 
-  function selectCategory(event) {
-    console.log(event.target.value);
-    setSelectedCategory(event.target.value);
+  function selectCategoryFunction(event) {
+    setSelectedCategory({
+      categoryName: event.target.value,
+      id: event.target.selectedOptions[0].id,
+      questions: [],
+    })
   }
 
-  function handleStartQuizBtn(event) {
-    console.log(event);
+  function handleStartQuizBtn() {
+    fetch(`https://opentdb.com/api.php?amount=3&category=${selectedCategory.id}&difficulty=easy&type=multiple`)
+    .then(res => res.json())
+    .then((data) => {  
+      console.log(data);
+      setSelectedCategory(prevState => {
+        return {
+          ...prevState,
+          questions: data.results
+        }
+
+      })
+    })
   }
   
 
   return (
     <>
       <h1>It's quiz time!</h1>
-      <Startpage selectCategory={selectCategory} handleStartQuizBtn={handleStartQuizBtn} />
+      <Startpage selectCategoryFunction={selectCategoryFunction} handleStartQuizBtn={handleStartQuizBtn} />
     </>
   )
 }

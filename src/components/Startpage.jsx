@@ -3,7 +3,6 @@ import React, {useState, useEffect} from "react";
 function Startpage(props) {
 
     const [allCategories, setAllCategories] = useState([]);
-    
 
     //Fetches all categories
     useEffect(() => {
@@ -14,18 +13,17 @@ function Startpage(props) {
         })
     }, [])
 
-
     return(
         <>
             <select 
                 name="categories" 
-                id="category-select"
-                onChange={props.selectCategory}
+                id='categoriesSelect'
+                onChange={props.selectCategoryFunction}               
             >
                 <option value="">Please choose an option</option>
             {
                 allCategories.map((category) => {
-                    return <option value={category.name}key={category.id}>{category.name}</option>
+                    return <option id={category.id} value={category.name} key={category.id}>{category.name}</option>
                 })
             }
             </select>
