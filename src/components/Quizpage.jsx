@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Question from "./Question.jsx";
 
 function Quizpage(props) {
 
     const [questions, setQuestions] = useState([]);
+
+
+
+    
 
 
     useEffect(() => { 
@@ -22,37 +27,35 @@ function Quizpage(props) {
            
             question.alternatives = shuffledAlternatives;
             question.id = i;
+            question.selectedAlternative = '';
         })
 
-        setQuestions(allQuestions)
+        setQuestions(allQuestions);
 
     }, [])
 
+
+    function handleAlternative(answer, id) {
+        console.log(answer);
+        console.log(id);
+
+        setQuestions(prevQuestions => {
+            return prevQuestions.map((question) => {
+                return question.id === id ? {...question, selectedAlternative: answer} : question;
+            })
+        })
+        
+    }
     
 
 
     return(
         <section className="quizContainer">
-
-
             
             {
-                questions.map((question) => {
-                    return(
-                        <section className="questionContainer" key={question.id}>
-                            <h2>{question.question}</h2>
-
-                            {
-                                question.alternatives.map((alternative) => {
-                                    return (                                      
-                                        <span className="alternative" key={alternative}>{alternative}</span>                    
-                                    ) 
-                                })
-                            }
-
-                        </section>
-                    )          
-                })
+                questions.map((question, i) => {
+                   return <Question question={question} key={i} handleAlternative={handleAlternative} />
+                })            
             }
 
 
