@@ -61,14 +61,6 @@ function App() {
 
       setGameInProgress(true)
 
-      /* console.log( (data.results.map(item => {
-        return item.questions
-      })));
-
-      console.log( (data.results.map(item => {
-        return Base64.decode(item.question)
-      }))); */
-
     })
   }
 
