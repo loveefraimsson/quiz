@@ -5,14 +5,10 @@ function Quizpage(props) {
     const [questions, setQuestions] = useState([]);
 
 
-    useEffect(() => {
-
-        
+    useEffect(() => { 
         let allQuestions = props.questions;
 
-       
-
-        allQuestions.map((question) => {
+        allQuestions.map((question, i) => {
 
             //Creates a new array from incorrect answers and also inserts the correct answer
             let alternatives = [...question.incorrect_answers];         
@@ -25,6 +21,7 @@ function Quizpage(props) {
             const shuffledAlternatives = shuffle(alternatives); 
            
             question.alternatives = shuffledAlternatives;
+            question.id = i;
         })
 
         setQuestions(allQuestions)
@@ -35,9 +32,32 @@ function Quizpage(props) {
 
 
     return(
-        <>
-            <h2>Quizpage</h2>
-        </>
+        <section className="quizContainer">
+
+
+            
+            {
+                questions.map((question) => {
+                    return(
+                        <section className="questionContainer" key={question.id}>
+                            <h2>{question.question}</h2>
+
+                            {
+                                question.alternatives.map((alternative) => {
+                                    return (                                      
+                                        <span className="alternative" key={alternative}>{alternative}</span>                    
+                                    ) 
+                                })
+                            }
+
+                        </section>
+                    )          
+                })
+            }
+
+
+
+        </section>
     )
 }
 
