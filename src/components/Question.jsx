@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 
 function Question(props) {
 
-    return (
+    const [activeId, setActiveId] = useState('');
 
+    return (
 
         <section className="questionContainer">
             <p>{props.question.question}</p>
@@ -12,13 +13,15 @@ function Question(props) {
             {props.question.alternatives.map((alternative) => {
                 return (                                      
                     <span 
-                        className="alternative" 
+                        className={ `alternative ${activeId === alternative.replace(/[^a-zA-Z0-9]/g, '') ? 'selectedAnswer' : '' } ` }
                         key={alternative}
                         value={alternative}
-                        id={alternative}
+                        id={alternative.replace(/[^a-zA-Z0-9]/g, '')}
                         onClick={() =>{
-                            props.handleAlternative(alternative, question.id)
-                        }}>
+                            props.handleAlternative(alternative, props.question.id);
+                            setActiveId(alternative.replace(/[^a-zA-Z0-9]/g, ''));
+                        }}   
+                        >  
                             {alternative}
                     </span>
 
