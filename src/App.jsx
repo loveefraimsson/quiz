@@ -70,7 +70,8 @@ function App() {
       <h1>It's quiz time!</h1>
 
       {
-        gameinProgress ? <Quizpage questions={questions} />
+        gameinProgress ? 
+        <><Quizpage questions={questions} /></>
         : <Startpage selectCategoryFunction={selectCategoryFunction} handleStartQuizBtn={handleStartQuizBtn} />
       }
 

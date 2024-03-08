@@ -14,3 +14,11 @@
 .quizContainer .questionContainer .selectedAnswer {
     color: blue;
 }
+
+.quizContainer .questionContainer .correctAnswer {
+    color: green;
+}
+
+.quizContainer .questionContainer .incorrectAnswer {
+    color: red;
+}
