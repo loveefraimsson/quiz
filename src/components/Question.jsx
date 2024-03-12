@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { nanoid } from 'nanoid'
+
 
 function Question(props) {
 
     const [activeId, setActiveId] = useState('');
 
     if(props.isGameFinished) {
-
         //MARKERA DOM RÄTTA SVAREN MED GRÖN FÄRG
         document.getElementById(props.question.correct_answer.replace(/[^a-zA-Z0-9]/g, '')).classList.add('correctAnswer');
 
@@ -13,8 +14,6 @@ function Question(props) {
         if(props.question.incorrect_answers.includes(props.question.selectedAlternative)) {
             document.getElementById(props.question.selectedAlternative.replace(/[^a-zA-Z0-9]/g, '')).classList.add('incorrectAnswer')
         }
-           
-
     }
 
     return (
@@ -44,6 +43,8 @@ function Question(props) {
 
         </section>
     )
+
+
 }
 
 export default Question;
