@@ -30,6 +30,7 @@ function App() {
 
   const [questions, setQuestions] = useState([]);
   const [gameinProgress, setGameInProgress] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(false);
 
 
 
@@ -65,14 +66,33 @@ function App() {
   }
 
 
+  function handleIsGameFinished() {
+    setIsGameFinished(prevState => !prevState);
+  }
+
+
+  function playAgain() {
+    setGameInProgress(prevState => !prevState);
+  }
+
+
   return (
     <>
       <h1>It's quiz time!</h1>
 
       {
         gameinProgress ? 
-        <><Quizpage questions={questions} /></>
-        : <Startpage selectCategoryFunction={selectCategoryFunction} handleStartQuizBtn={handleStartQuizBtn} />
+        <><Quizpage 
+            questions={questions} 
+            isGameFinished={isGameFinished} 
+            gameinProgress={gameinProgress}
+            handleIsGameFinished={handleIsGameFinished} 
+            playAgain={playAgain}/>
+        </>
+        : 
+        <Startpage 
+          selectCategoryFunction={selectCategoryFunction} 
+          handleStartQuizBtn={handleStartQuizBtn} />
       }
 
       

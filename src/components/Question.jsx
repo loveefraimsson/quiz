@@ -7,10 +7,10 @@ function Question(props) {
     const [activeId, setActiveId] = useState('');
 
     if(props.isGameFinished) {
-        //MARKERA DOM RÄTTA SVAREN MED GRÖN FÄRG
+        //MARK THE RIGHT ANSWERS IN GREEN COLOR
         document.getElementById(props.question.correct_answer.replace(/[^a-zA-Z0-9]/g, '')).classList.add('correctAnswer');
 
-        //KOLLA OM  SELECTEDALTERNATIVE ÄR MED I ARRAYEN INCORRECT_ANSWER, ÄR DEN DET SÅ GE CLASSEN INCORRECTANSWER
+        //CHECK IF THE SECTEDALTERNATIVE IS IN THE ARRAY OF INCORRECT_ANSWERS, IF IT IS, GIVE THE IT THE CLASS INCORRECTANSWER
         if(props.question.incorrect_answers.includes(props.question.selectedAlternative)) {
             document.getElementById(props.question.selectedAlternative.replace(/[^a-zA-Z0-9]/g, '')).classList.add('incorrectAnswer')
         }

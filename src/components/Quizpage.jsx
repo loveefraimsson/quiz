@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 function Quizpage(props) {
 
     const [questions, setQuestions] = useState([]);
-    const [isGameFinished, setIsGameFinished] = useState(false);
+    //const [isGameFinished, setIsGameFinished] = useState(false);
     const [count, setCount] = useState(0);
 
     useEffect(() => { 
@@ -41,7 +41,9 @@ function Quizpage(props) {
 
 
     function checkAnswers() {
-        setIsGameFinished(true);
+        props.handleIsGameFinished()
+        props.handleGameInProgress()
+        //setIsGameFinished(true);
 
         //Checks how many correct answers there is and sets to state
         let counter = 0;
@@ -51,9 +53,6 @@ function Quizpage(props) {
             } 
         })   
         setCount(counter);
-
-
-
     }
 
     return(
@@ -66,15 +65,23 @@ function Quizpage(props) {
                             question={question} 
                             key={i} 
                             handleAlternative={handleAlternative}
-                            isGameFinished={isGameFinished} 
+                            isGameFinished={props.isGameFinished} 
                         />
                     )
                 })            
             }
 
-            <button onClick={checkAnswers}>Check answers</button>
+            {
+                props.isGameFinished ? <button onClick={props.playAgain}>Play again</button> :
+                <button onClick={checkAnswers}>Check answers</button>
+
+            }
             
-            {isGameFinished ? <p>You scored {count}/10 answers</p> : null}
+            
+            
+            
+            
+            {props.isGameFinished ? <p>You scored {count}/10 answers</p> : null}
 
         </section>
     )
