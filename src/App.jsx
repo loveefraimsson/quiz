@@ -10,46 +10,66 @@ import { Base64 } from 'js-base64';
 
 function App() {
 
-  const [selectedCategory, setSelectedCategory] = useState({
-    categoryName: '',
-    id: 0
-  });
+  const [selectedCategory, setSelectedCategory] = useState({});
+  const [selectedDifficulty, setSelectedDifficulty] = useState('');
+  const [selectedAmount, setSelectedAmount] =  useState('');
+  const [errorMessageRunGame, setErrorMessageRunGame] = useState('');
 
   const [questions, setQuestions] = useState([]);
   const [gameinProgress, setGameInProgress] = useState(false);
   const [isGameFinished, setIsGameFinished] = useState(false);
 
 
+  function selectFunction(event) {
+    const {name, value, selectedOptions, valueAsNumber} = event.target
+    
+    switch (name) {
+      case 'categories':
+        setSelectedCategory({
+          categoryName: value,
+          id: selectedOptions[0].id
+        });
+        break;
 
-  function selectCategoryFunction(event) {
-    setSelectedCategory({
-      categoryName: event.target.value,
-      id: event.target.selectedOptions[0].id
-    })
+      case 'difficulty':
+        setSelectedDifficulty(value);
+        break;
+
+      case 'amount':
+        setSelectedAmount(valueAsNumber);
+        break;
+    }
   }
 
   function handleStartQuizBtn() {
-    fetch(`https://opentdb.com/api.php?amount=3&category=${selectedCategory.id}&difficulty=easy&type=multiple&encode=base64`)
-    .then(res => res.json())
-    .then((data) => {  
-      
-      setQuestions(data.results.map(item => {
-        return({
-          type: Base64.decode(item.type),
-          difficulty: Base64.decode(item.difficulty),
-          category: Base64.decode(item.category),
-          question: Base64.decode(item.question),
-          correct_answer: Base64.decode(item.correct_answer),
-          incorrect_answers: item.incorrect_answers.map((incorrectAnswer => {
-            return Base64.decode(incorrectAnswer);
-          }))
-        }) 
+
+    if(selectedCategory && selectedDifficulty && selectedAmount) {
+      fetch(`https://opentdb.com/api.php?amount=${selectedAmount}&category=${selectedCategory.id}&difficulty=${selectedDifficulty}&type=multiple&encode=base64`)
+      .then(res => res.json())
+      .then((data) => {  
         
-      }))
+        setQuestions(data.results.map(item => {
+          return({
+            type: Base64.decode(item.type),
+            difficulty: Base64.decode(item.difficulty),
+            category: Base64.decode(item.category),
+            question: Base64.decode(item.question),
+            correct_answer: Base64.decode(item.correct_answer),
+            incorrect_answers: item.incorrect_answers.map((incorrectAnswer => {
+              return Base64.decode(incorrectAnswer);
+            }))
+          }) 
+          
+        }))
 
-      setGameInProgress(true)
+        setGameInProgress(true)
 
-    })
+      })
+    } else {
+      setErrorMessageRunGame('You must fill in all fields before starting the quiz!')
+    }
+
+    /*  */
   }
 
 
@@ -61,6 +81,10 @@ function App() {
   function playAgain() {
     setGameInProgress(prevState => !prevState);
     setIsGameFinished(prevState => !prevState);
+    setSelectedCategory({});
+    setSelectedDifficulty('');
+    setSelectedAmount('');
+    setQuestions([]);
   }
 
 
@@ -70,17 +94,22 @@ function App() {
 
       {
         gameinProgress ? 
-        <><Quizpage 
+        <Quizpage 
             questions={questions} 
             isGameFinished={isGameFinished} 
             gameinProgress={gameinProgress}
             handleIsGameFinished={handleIsGameFinished} 
-            playAgain={playAgain}/>
-        </>
+            playAgain={playAgain}
+            selectedCategory={selectedCategory}
+            selectedDifficulty={selectedDifficulty}
+            selectedAmount={selectedAmount}
+        />
         : 
         <Startpage 
-          selectCategoryFunction={selectCategoryFunction} 
-          handleStartQuizBtn={handleStartQuizBtn} />
+          selectFunction={selectFunction} 
+          handleStartQuizBtn={handleStartQuizBtn} 
+          errorMessageRunGame={errorMessageRunGame}
+        />
       }
 
       

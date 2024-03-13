@@ -67,6 +67,9 @@ function Quizpage(props) {
 
     return(
         <section className="quizContainer">
+
+            <p>Category: {props.selectedCategory.categoryName}</p>
+            <p>Difficulty: {props.selectedDifficulty.charAt(0).toUpperCase() + props.selectedDifficulty.slice(1)}</p>
             
             {
                 questions.map((question, i) => {

@@ -15,19 +15,28 @@ function Startpage(props) {
 
     return(
         <>
-            <select 
-                name="categories" 
-                id='categoriesSelect'
-                onChange={props.selectCategoryFunction}               
-            >
-                <option value="">Please choose an option</option>
+            <select name="categories" id='categoriesSelect'onChange={props.selectFunction}>
+                <option value="">Please choose an category</option>
             {
                 allCategories.map((category) => {
                     return <option id={category.id} value={category.name} key={category.id}>{category.name}</option>
                 })
             }
             </select>
+
+            <select name="difficulty" id="difficultySelect" onChange={props.selectFunction}>
+                <option value="">Please choose a difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <input type="number" name="amount" onChange={props.selectFunction} placeholder="Please insert the amount of questions" />
+
+
             <button onClick={props.handleStartQuizBtn}>Start Quiz</button>
+
+            <p>{props.errorMessageRunGame}</p>
         </>
     )
 }
