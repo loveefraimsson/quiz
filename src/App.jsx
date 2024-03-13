@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Startpage from './components/Startpage';
 import Quizpage from './components/Quizpage';
-
+import upperVector from './assets/upperVector.svg';
+import lowerVector from './assets/lowerVector.svg';
 import './App.css';
 
 import { Base64 } from 'js-base64';
@@ -89,7 +90,8 @@ function App() {
 
 
   return (
-    <>
+    <main>
+      <img src={upperVector} alt="Vector" className='upperVector' />
       <h1>It's quiz time!</h1>
 
       {
@@ -112,8 +114,8 @@ function App() {
         />
       }
 
-      
-    </>
+      <img src={lowerVector} alt="Vector" className='lowerVector' />
+    </main>
   )
 }
 

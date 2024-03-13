@@ -1,3 +1,92 @@
+:root {
+    --backgroundColor: #f5f7fb;
+    --darkBlue: #293264;
+    --lightBlue: #D6DBF5;
+    --buttonColor: #4D5B9E;
+    --white: #FFFFFF;
+    --green: #94D7A2;
+    --red: #F8BCBC;
+    --disabled: #a1a9cd;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--backgroundColor);
+    font-family: 'Roboto', sans-serif;
+    color: var(--darkBlue);
+}
+
+.upperVector {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.lowerVector {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.button {
+    background-color: var(--darkBlue);
+    color: var(--white);
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.button:hover {
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+}
+
+/*------------------------------- STARTPAGE ---------------------------------*/
+.startpageContainer select, 
+.startpageContainer input {
+    width: 300px;
+    margin-bottom: 24px;
+    border-radius: 5px;
+    border: 1px solid var(--darkBlue);
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: var(--darkBlue);
+}
+
+
+.startpageContainer input {
+    width: 280px;
+}
+
+.startpageContainer input::placeholder {
+    color: var(--darkBlue);
+}
+
+
+
+
 .quizContainer .questionContainer {
     margin-bottom: 50px;
 }
