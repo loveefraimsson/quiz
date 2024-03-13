@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Question from "./Question.jsx";
-import { nanoid } from 'nanoid'
 
 function Quizpage(props) {
 
     const [questions, setQuestions] = useState([]);
-    //const [isGameFinished, setIsGameFinished] = useState(false);
     const [count, setCount] = useState(0);
+    const [message, setMessage] = useState('');
+    const [errorMessageClass, setErrorMessageClass] = useState('');
 
     useEffect(() => { 
         let allQuestions = props.questions;
@@ -30,6 +30,7 @@ function Quizpage(props) {
     }, [])
 
 
+    //Sets the clicked alternative to question object in selectedAlternative
     function handleAlternative(answer, id) {
         setQuestions(prevQuestions => {
             return prevQuestions.map((question) => {
@@ -41,18 +42,27 @@ function Quizpage(props) {
 
 
     function checkAnswers() {
-        props.handleIsGameFinished()
-        props.handleGameInProgress()
-        //setIsGameFinished(true);
-
-        //Checks how many correct answers there is and sets to state
+        
+        //Checks how many correct answers there is and sets to state and prints it out
         let counter = 0;
-        questions.map((question) => {
-            if(question.correct_answer === question.selectedAlternative) {
-                counter = counter + 1;
-            } 
-        })   
-        setCount(counter);
+        let allQuestionsAnswered = questions.every(question => question.selectedAlternative);  
+       
+        if(allQuestionsAnswered) {
+            questions.map((question) => {
+                if(question.correct_answer === question.selectedAlternative) {
+                    counter = counter + 1;
+                } 
+            }) 
+            setCount(counter);
+            setErrorMessageClass('');
+            setMessage(`You scored ${counter}/10 answers`)
+            props.handleIsGameFinished();
+        } 
+        else {
+            setErrorMessageClass('errorMessage');
+            setMessage('Answer all questions before checking the answers!');
+
+        }        
     }
 
     return(
@@ -71,17 +81,14 @@ function Quizpage(props) {
                 })            
             }
 
+
             {
                 props.isGameFinished ? <button onClick={props.playAgain}>Play again</button> :
                 <button onClick={checkAnswers}>Check answers</button>
-
             }
             
             
-            
-            
-            
-            {props.isGameFinished ? <p>You scored {count}/10 answers</p> : null}
+            <p id="message" className={`${errorMessageClass}`}>{message}</p>
 
         </section>
     )

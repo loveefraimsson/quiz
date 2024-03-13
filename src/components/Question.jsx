@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { nanoid } from 'nanoid'
-
 
 function Question(props) {
 
     const [activeId, setActiveId] = useState('');
 
     if(props.isGameFinished) {
-        //MARK THE RIGHT ANSWERS IN GREEN COLOR
+        //Mark the right answers in green color
         document.getElementById(props.question.correct_answer.replace(/[^a-zA-Z0-9]/g, '')).classList.add('correctAnswer');
 
-        //CHECK IF THE SECTEDALTERNATIVE IS IN THE ARRAY OF INCORRECT_ANSWERS, IF IT IS, GIVE THE IT THE CLASS INCORRECTANSWER
+        //Check if the selectedAlternative is in the array of incorrect_answers, if it is, give is the class incorrectAnswer
         if(props.question.incorrect_answers.includes(props.question.selectedAlternative)) {
-            document.getElementById(props.question.selectedAlternative.replace(/[^a-zA-Z0-9]/g, '')).classList.add('incorrectAnswer')
+            document.getElementById(props.question.selectedAlternative.replace(/[^a-zA-Z0-9]/g, '')).classList.add('incorrectAnswer');
         }
     }
 

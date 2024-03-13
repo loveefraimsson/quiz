@@ -8,21 +8,8 @@ import './App.css';
 import { Base64 } from 'js-base64';
 
 
-
-//Allt utom kategori
-//'https://opentdb.com/api.php?amount=10&difficulty=easy&type=boolean'
-
-
-//Allt inklusive kategori
-//https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=boolean
-
-
-//Hämta alla kategorier
-//https://opentdb.com/api_category.php
-
 function App() {
 
-  
   const [selectedCategory, setSelectedCategory] = useState({
     categoryName: '',
     id: 0
@@ -73,6 +60,7 @@ function App() {
 
   function playAgain() {
     setGameInProgress(prevState => !prevState);
+    setIsGameFinished(prevState => !prevState);
   }
 
 
