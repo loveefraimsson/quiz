@@ -66,34 +66,36 @@ function Quizpage(props) {
     }
 
     return(
-        <section className="quizContainer">
+            <section className="quizContainer">
+                <h1>It's quiz time!</h1>
+                <section className="infoSection">
+                    <p>Category: {props.selectedCategory.categoryName}</p>
+                    <p>Difficulty: {props.selectedDifficulty.charAt(0).toUpperCase() + props.selectedDifficulty.slice(1)}</p>
+                </section>
+                
+                {
+                    questions.map((question, i) => {
+                        return (
+                            <Question 
+                                question={question} 
+                                key={i} 
+                                handleAlternative={handleAlternative}
+                                isGameFinished={props.isGameFinished} 
+                            />
+                        )
+                    })            
+                }
 
-            <p>Category: {props.selectedCategory.categoryName}</p>
-            <p>Difficulty: {props.selectedDifficulty.charAt(0).toUpperCase() + props.selectedDifficulty.slice(1)}</p>
-            
-            {
-                questions.map((question, i) => {
-                    return (
-                        <Question 
-                            question={question} 
-                            key={i} 
-                            handleAlternative={handleAlternative}
-                            isGameFinished={props.isGameFinished} 
-                        />
-                    )
-                })            
-            }
 
-
-            {
-                props.isGameFinished ? <button onClick={props.playAgain}>Play again</button> :
-                <button onClick={checkAnswers}>Check answers</button>
-            }
-            
-            
-            <p id="message" className={`${errorMessageClass}`}>{message}</p>
-
-        </section>
+                {
+                    props.isGameFinished ? <button className="button" onClick={props.playAgain}>Play again</button> :
+                    <button className="button" onClick={checkAnswers}>Check answers</button>
+                }
+                
+                
+                <p id="message" className={`message ${errorMessageClass}`}>{message}</p>
+                
+            </section>
     )
 
 

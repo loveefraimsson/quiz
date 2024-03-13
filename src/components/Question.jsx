@@ -15,31 +15,36 @@ function Question(props) {
     }
 
     return (
+        <>
+            <section className="questionContainer">
+                <p className="question">{props.question.question}</p>
 
-        <section className="questionContainer">
-            <p>{props.question.question}</p>
+                <section className="alternativeSection">
+                {props.question.alternatives.map((alternative) => {
 
-            {props.question.alternatives.map((alternative) => {
+                    let id = alternative.replace(/[^a-zA-Z0-9]/g, '');
+                    return (                                      
+                        <span 
+                            className={ `alternative ${activeId === id ? 'selectedAnswer' : '' }` }
+                            key={alternative}
+                            value={alternative}
+                            id={id}
+                            onClick={() =>{
+                                props.handleAlternative(alternative, props.question.id);
+                                setActiveId(id);
+                            }}   
+                            >  
+                                {alternative}
+                        </span>
 
-                let id = alternative.replace(/[^a-zA-Z0-9]/g, '');
-                return (                                      
-                    <span 
-                        className={ `alternative ${activeId === id ? 'selectedAnswer' : '' }` }
-                        key={alternative}
-                        value={alternative}
-                        id={id}
-                        onClick={() =>{
-                            props.handleAlternative(alternative, props.question.id);
-                            setActiveId(id);
-                        }}   
-                        >  
-                            {alternative}
-                    </span>
+                    ) 
+                })}
+                </section>
 
-                ) 
-            })}
+            </section>
 
-        </section>
+            <hr />
+        </>
     )
 
 

@@ -8,7 +8,6 @@ import './App.css';
 
 import { Base64 } from 'js-base64';
 
-
 function App() {
 
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -90,9 +89,9 @@ function App() {
 
 
   return (
-    <main>
+    <section className='app'>
       <img src={upperVector} alt="Vector" className='upperVector' />
-      <h1>It's quiz time!</h1>
+      
 
       {
         gameinProgress ? 
@@ -114,8 +113,8 @@ function App() {
         />
       }
 
-      <img src={lowerVector} alt="Vector" className='lowerVector' />
-    </main>
+      <img src={lowerVector} alt="Vector" className='lowerVector' /> 
+    </section>
   )
 }
 

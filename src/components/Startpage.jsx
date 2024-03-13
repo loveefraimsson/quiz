@@ -15,28 +15,34 @@ function Startpage(props) {
 
     return(
         <section className="startpageContainer">
-            <select name="categories" id='categoriesSelect'onChange={props.selectFunction}>
-                <option value="">Please choose an category</option>
-            {
-                allCategories.map((category) => {
-                    return <option id={category.id} value={category.name} key={category.id}>{category.name}</option>
-                })
-            }
-            </select> <br />
+            <section>
 
-            <select name="difficulty" id="difficultySelect" onChange={props.selectFunction}>
-                <option value="">Please choose a difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select> <br />
+            
+                <h1>It's quiz time!</h1>
+                <select name="categories" id='categoriesSelect'onChange={props.selectFunction}>
+                    <option value="">Please choose an category</option>
+                {
+                    allCategories.map((category) => {
+                        return <option id={category.id} value={category.name} key={category.id}>{category.name}</option>
+                    })
+                }
+                </select> <br />
 
-            <input type="number" name="amount" onChange={props.selectFunction} placeholder="Please insert the amount of questions" /> <br />
+                <select name="difficulty" id="difficultySelect" onChange={props.selectFunction}>
+                    <option value="">Please choose a difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select> <br />
+
+                <input type="number" name="amount" onChange={props.selectFunction} placeholder="Please insert the amount of questions" /> <br />
 
 
-            <button className="button" onClick={props.handleStartQuizBtn}>Start Quiz</button>
+                <button className="button" onClick={props.handleStartQuizBtn}>Start Quiz</button>
 
-            <p>{props.errorMessageRunGame}</p>
+                <p className="errorMessage">{props.errorMessageRunGame}</p>
+            </section>
+            
         </section>
     )
 }
