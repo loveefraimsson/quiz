@@ -6,11 +6,11 @@ function Question(props) {
 
     if(props.isGameFinished) {
         //Mark the right answers in green color
-        document.getElementById(props.question.correct_answer.replace(/[^a-zA-Z0-9]/g, '')).classList.add('correctAnswer');
+        document.getElementById(props.question.correct_answer.split(" ").join("")).classList.add('correctAnswer');
 
         //Check if the selectedAlternative is in the array of incorrect_answers, if it is, give is the class incorrectAnswer
         if(props.question.incorrect_answers.includes(props.question.selectedAlternative)) {
-            document.getElementById(props.question.selectedAlternative.replace(/[^a-zA-Z0-9]/g, '')).classList.add('incorrectAnswer');
+            document.getElementById(props.question.selectedAlternative.split(" ").join("")).classList.add('incorrectAnswer');
         }
     }
 
@@ -22,7 +22,7 @@ function Question(props) {
                 <section className="alternativeSection">
                 {props.question.alternatives.map((alternative) => {
 
-                    let id = alternative.replace(/[^a-zA-Z0-9]/g, '');
+                    let id = alternative.split(" ").join("");
                     return (                                      
                         <span 
                             className={ `alternative ${activeId === id ? 'selectedAnswer' : '' }` }
