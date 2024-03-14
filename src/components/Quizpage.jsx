@@ -56,7 +56,7 @@ function Quizpage(props) {
             }) 
             setCount(counter);
             setErrorMessageClass('');
-            setMessage(`You scored ${counter}/${props.selectedAmount} answers`);
+            setMessage(`You scored ${counter}/${props.selectedAmount} correct answers`);
             props.handleIsGameFinished();
         } 
         else {
