@@ -68,8 +68,6 @@ function App() {
     } else {
       setErrorMessageRunGame('You must fill in all fields before starting the quiz!')
     }
-
-    /*  */
   }
 
 
