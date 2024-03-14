@@ -26,21 +26,8 @@ function Quizpage(props) {
             question.id = i;
             question.selectedAlternative = '';
         })
-
-        let obj = [{
-            type: 'multiple',
-            difficulty: 'easy',
-            category: 'Entertainmet: books',
-            question: 'hej',
-            correct_answer: '+',
-            incorrect_answers: ['-', '*', '÷'],
-            alternatives: ['-', '*', '÷', '+'],
-            id: 0,
-            selectedAlternative: ''
-        }]
-
-
-        setQuestions(obj);
+        
+        setQuestions(allQuestions);
     }, [])
 
 
